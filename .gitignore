@@ -3,3 +3,5 @@ node_modules/
 temp_*
 *.zip
 package-lock.json
+test*.pdf
+test*.html

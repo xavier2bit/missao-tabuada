@@ -315,6 +315,237 @@
     .victory-toast.active {
       transform: translateX(-50%) translateY(0);
     }
+
+    /* Materials & Bonus Modal */
+    .nav-btn-bonus {
+      background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+      color: #FFFFFF;
+      border: none;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      padding: 7px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.35);
+      transition: all 0.2s ease;
+    }
+    .nav-btn-bonus:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(245, 158, 11, 0.5);
+    }
+
+    /* Top Quick Banner */
+    .materials-quick-banner {
+      width: 100%;
+      background: linear-gradient(90deg, #1E3A8A 0%, #0284C7 50%, #0D9488 100%);
+      border-bottom: 2px solid #38BDF8;
+      padding: 10px 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+    .mqb-content {
+      max-width: 1200px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .mqb-badge {
+      background: #FEF08A;
+      color: #854D0E;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 12px;
+      letter-spacing: 0.5px;
+      display: inline-block;
+    }
+    .mqb-text {
+      font-size: 12.5px;
+      color: #FFFFFF;
+      font-weight: 600;
+      flex: 1;
+      min-width: 280px;
+    }
+    .mqb-btn {
+      background: #FFFFFF;
+      color: #0369A1;
+      border: 2px solid #FFFFFF;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 12.5px;
+      font-weight: 800;
+      padding: 6px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .mqb-btn:hover {
+      background: #E0F2FE;
+      transform: scale(1.04);
+    }
+
+    /* Modal Overlay & Card */
+    .bonus-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 4000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .bonus-modal-overlay.active {
+      display: flex;
+      animation: modalFadeIn 0.25s ease-out;
+    }
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: scale(0.96); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .bonus-modal-card {
+      background: #0F172A;
+      border: 3px solid #F59E0B;
+      border-radius: 20px;
+      width: 100%;
+      max-width: 980px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+      display: flex;
+      flex-direction: column;
+      color: #F8FAFC;
+    }
+    .bm-header {
+      padding: 16px 24px;
+      background: #1E293B;
+      border-bottom: 2px solid #334155;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .bmh-title {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 20px;
+      font-weight: 900;
+      color: #F59E0B;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .bm-close-btn {
+      background: #334155;
+      border: none;
+      color: #F8FAFC;
+      font-size: 18px;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .bm-close-btn:hover { background: #EF4444; }
+    .bm-body {
+      padding: 20px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .bm-subtitle {
+      font-size: 13px;
+      color: #94A3B8;
+      line-height: 1.4;
+    }
+    .bm-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 14px;
+    }
+    .bm-item {
+      background: #1E293B;
+      border: 2px solid #334155;
+      border-radius: 12px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.2s;
+    }
+    .bm-item:hover {
+      border-color: #38BDF8;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+    .bmi-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .bmi-badge {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 6px;
+      color: #FFFFFF;
+    }
+    .bmi-pages {
+      font-size: 11px;
+      color: #94A3B8;
+      font-weight: 700;
+    }
+    .bmi-title {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      color: #FFFFFF;
+      margin-bottom: 4px;
+      line-height: 1.25;
+    }
+    .bmi-desc {
+      font-size: 11.5px;
+      color: #94A3B8;
+      line-height: 1.35;
+      margin-bottom: 12px;
+      flex: 1;
+    }
+    .bmi-download-btn {
+      background: #0284C7;
+      color: #FFFFFF;
+      text-decoration: none;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 12.5px;
+      font-weight: 800;
+      padding: 8px 12px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: background 0.2s;
+    }
+    .bmi-download-btn:hover {
+      background: #0369A1;
+    }
   </style>
 </head>
 <body>
@@ -390,11 +621,21 @@
 
       <button class="audio-toggle-btn" id="audioToggle" title="Ativar/Desativar Sons">🔊</button>
       <button class="nav-btn-print" onclick="window.print()">🖨️ Imprimir</button>
+      <button class="nav-btn-bonus" onclick="openBonusModal()">🎁 Materiais A4 (6 PDFs)</button>
       <a href="Missao_Tabuada_Volume_1.pdf" download="Missao_Tabuada_Volume_1.pdf" class="nav-btn-action">
         📥 Baixar PDF Oficial (43 Págs)
       </a>
     </div>
   </nav>
+
+  <!-- Quick Access Top Banner for All Bonus PDFs -->
+  <div class="materials-quick-banner">
+    <div class="mqb-content">
+      <span class="mqb-badge">✨ PACOTE COMPLETO DE MATERIAIS PARA IMPRIMIR</span>
+      <span class="mqb-text">Acesse os 6 PDFs oficiais: Livro Completo, Cronograma 12 Semanas, Fichas Diárias, Caderno de Pintura, Desafios e Jogos!</span>
+      <button class="mqb-btn" onclick="openBonusModal()">Abrir Central de Downloads (6 PDFs) 📥</button>
+    </div>
+  </div>
 
   <!-- Book Container with 43 Pages -->
   <main class="book-container" id="bookContainer">
@@ -11359,6 +11600,99 @@
 
   </main>
 
+  <!-- Bonus & Materials Modal (6 PDFs) -->
+  <div class="bonus-modal-overlay" id="bonusModal" onclick="handleModalBackdropClick(event)">
+    <div class="bonus-modal-card">
+      <div class="bm-header">
+        <h3 class="bmh-title">🎁 CENTRAL DE MATERIAIS & BÔNUS A4</h3>
+        <button class="bm-close-btn" onclick="closeBonusModal()" title="Fechar">✕</button>
+      </div>
+      <div class="bm-body">
+        <p class="bm-subtitle">Todos os materiais foram desenvolvidos sob rigoroso padrão pedagógico e formatados em A4 de alta resolução, prontos para impressão em casa ou na gráfica. Clique no botão de cada material para fazer o download imediato:</p>
+
+        <div class="bm-grid">
+          <!-- Item 1: Livro Oficial -->
+          <div class="bm-item">
+            <div class="bmi-head">
+              <span class="bmi-badge" style="background: #0284C7;">LIVRO OFICIAL</span>
+              <span class="bmi-pages">43 Páginas • A4</span>
+            </div>
+            <h4 class="bmi-title">Missão Tabuada: Volume 1 (1 ao 10)</h4>
+            <p class="bmi-desc">O livro completo com 828 contas verificadas, AcroForms interativos para preenchimento no computador ou tablet, Mascotes em alta definição, Tracker dos Escudos e Certificado Oficial.</p>
+            <a href="Missao_Tabuada_Volume_1.pdf" download="Missao_Tabuada_Volume_1.pdf" class="bmi-download-btn">
+              📥 Baixar Livro Oficial (PDF)
+            </a>
+          </div>
+
+          <!-- Item 2: Cronograma Mestre -->
+          <div class="bm-item">
+            <div class="bmi-head">
+              <span class="bmi-badge" style="background: #D97706;">PLANEJAMENTO</span>
+              <span class="bmi-pages">6 Páginas • A4</span>
+            </div>
+            <h4 class="bmi-title">Cronograma Mestre de 12 Semanas</h4>
+            <p class="bmi-desc">Guia passo a passo de 15 minutos por dia para pais e professores. Roteiro diário de segunda a sexta, metodologia dos micro-passos, sem estresse e com foco na retenção de longo prazo.</p>
+            <a href="Cronograma_Mestre_12_Semanas.pdf" download="Cronograma_Mestre_12_Semanas.pdf" class="bmi-download-btn" style="background: #D97706;">
+              📥 Baixar Cronograma (PDF)
+            </a>
+          </div>
+
+          <!-- Item 3: Fichas Diárias -->
+          <div class="bm-item">
+            <div class="bmi-head">
+              <span class="bmi-badge" style="background: #16A34A;">TREINO RÁPIDO</span>
+              <span class="bmi-pages">10 Páginas • A4</span>
+            </div>
+            <h4 class="bmi-title">Caderno de Atividades & Fichas Diárias</h4>
+            <p class="bmi-desc">20 fichas diárias em formato de cartão destacável (2 por folha). Ideal para levar em viagens, treinar no café da manhã e manter o hábito ativo sem sobrecarregar a criança.</p>
+            <a href="Caderno_de_Atividades_Fichas_Diarias.pdf" download="Caderno_de_Atividades_Fichas_Diarias.pdf" class="bmi-download-btn" style="background: #16A34A;">
+              📥 Baixar Fichas Diárias (PDF)
+            </a>
+          </div>
+
+          <!-- Item 4: Caderno de Pintura -->
+          <div class="bm-item">
+            <div class="bmi-head">
+              <span class="bmi-badge" style="background: #EA580C;">ARTE & LÚDICO</span>
+              <span class="bmi-pages">8 Páginas • A4</span>
+            </div>
+            <h4 class="bmi-title">Caderno de Pintura por Multiplicação</h4>
+            <p class="bmi-desc">6 grandes obras de arte matemáticas no formato "Color by Number". A criança calcula a região e descobre a cor correspondente (Escudo, Foguete, Robô, Castelo, Monstro e Troféu).</p>
+            <a href="Caderno_de_Pintura_Multiplicacao.pdf" download="Caderno_de_Pintura_Multiplicacao.pdf" class="bmi-download-btn" style="background: #EA580C;">
+              📥 Baixar Caderno de Pintura (PDF)
+            </a>
+          </div>
+
+          <!-- Item 5: Desafios Semanais -->
+          <div class="bm-item">
+            <div class="bmi-head">
+              <span class="bmi-badge" style="background: #9333EA;">AVALIAÇÃO</span>
+              <span class="bmi-pages">8 Páginas • A4</span>
+            </div>
+            <h4 class="bmi-title">Desafios Semanais de Acompanhamento</h4>
+            <p class="bmi-desc">12 testes semanais cronometrados correspondentes às 12 semanas do cronograma, com rubrica de avaliação, carimbo do Guardião, gabarito e guia de intervenção pedagógica para os pais.</p>
+            <a href="Desafios_Semanais_Acompanhamento.pdf" download="Desafios_Semanais_Acompanhamento.pdf" class="bmi-download-btn" style="background: #9333EA;">
+              📥 Baixar Desafios Semanais (PDF)
+            </a>
+          </div>
+
+          <!-- Item 6: Jogos de Tabuada -->
+          <div class="bm-item">
+            <div class="bmi-head">
+              <span class="bmi-badge" style="background: #E11D48;">JOGOS EM FAMÍLIA</span>
+              <span class="bmi-pages">8 Páginas • A4</span>
+            </div>
+            <h4 class="bmi-title">Kit de Jogos: Trilha, Dominó & Bingo</h4>
+            <p class="bmi-desc">Tabuleiro completo da Trilha dos Heróis com peões 3D e dado montável, jogo completo de 28 pedras de Dominó da Multiplicação e Bingo com 8 cartelas coloridas + 36 fichas de sorteio.</p>
+            <a href="Jogos_da_Tabuada_Trilha_Domino_Bingo.pdf" download="Jogos_da_Tabuada_Trilha_Domino_Bingo.pdf" class="bmi-download-btn" style="background: #E11D48;">
+              📥 Baixar Jogos da Tabuada (PDF)
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Interactive Victory Toast -->
   <div class="victory-toast" id="victoryToast">
     <span>🏆</span>
@@ -11614,6 +11948,35 @@
       requestAnimationFrame(renderConfetti);
     }
     renderConfetti();
+
+    // ---------------- BONUS MODAL CONTROLS ----------------
+    function openBonusModal() {
+      const modal = document.getElementById('bonusModal');
+      if (modal) {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeBonusModal() {
+      const modal = document.getElementById('bonusModal');
+      if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+
+    function handleModalBackdropClick(e) {
+      if (e.target && e.target.id === 'bonusModal') {
+        closeBonusModal();
+      }
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeBonusModal();
+      }
+    });
   </script>
 </body>
 </html>
