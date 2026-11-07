@@ -1675,6 +1675,31 @@
     }
   }
 
+  
+  @media (max-width: 380px) {
+    .hero-content h1 {
+      font-size: 21px !important;
+    }
+    .hero-visual-frame {
+      max-width: 255px !important;
+      padding: 6px !important;
+    }
+    .flying-girl-anchor {
+      width: 64px !important;
+      top: -16px !important;
+      right: -4px !important;
+    }
+    .flying-boy-anchor {
+      width: 60px !important;
+      bottom: -12px !important;
+      left: -4px !important;
+    }
+    .hero-visual-tag {
+      font-size: 10.5px !important;
+      padding: 3px 10px !important;
+    }
+  }
+
   @media (max-width: 640px) {
     .container {
       padding: 0 14px;
@@ -1701,19 +1726,32 @@
       display: none;
     }
     .hero-visual-frame {
-      max-width: 330px;
-      padding: 10px;
-      margin: 6px auto 14px;
+      max-width: 290px;
+      width: calc(100% - 24px);
+      padding: 8px;
+      margin: 10px auto 16px;
+      box-sizing: border-box;
+      overflow: visible;
     }
     .flying-girl-anchor {
-      top: -24px;
-      right: -8px;
-      width: 86px;
+      top: -16px;
+      right: 4px;
+      width: 70px;
+    }
+    .hero-visual-tag {
+      font-size: 11px !important;
+      padding: 3px 12px !important;
+      white-space: nowrap;
     }
     .flying-boy-anchor {
-      bottom: -18px;
-      left: -8px;
-      width: 80px;
+      bottom: -14px;
+      left: -6px;
+      width: 72px;
+    }
+    .hero-visual-footer {
+      font-size: 11px;
+      gap: 4px;
+      padding-left: 24px;
     }
     .particle-star-1 {
       top: -12px;
@@ -1811,6 +1849,32 @@
     }
   }
 </style>
+
+    <!-- Meta Pixel Code (Facebook & Instagram Ads) -->
+    <script>
+      // Insira o ID do seu Meta Pixel abaixo:
+      const META_PIXEL_ID = window.META_PIXEL_ID || "SEU_PIXEL_AQUI";
+
+      if (META_PIXEL_ID && META_PIXEL_ID !== "SEU_PIXEL_AQUI") {
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', META_PIXEL_ID);
+        fbq('track', 'PageView');
+        fbq('track', 'ViewContent', {
+          content_name: 'Heróis da Multiplicação',
+          content_category: 'Material Pedagógico Infantil',
+          value: 10.00,
+          currency: 'BRL'
+        });
+      }
+    </script>
+
 </head>
 <body>
 
@@ -2562,22 +2626,77 @@
    * Redireciona o usuário para o checkout do ggCheckout correspondente.
    * @param {('basic'|'premium')} plan Tipo do plano selecionado.
    */
-  function handleCheckout(plan) {
-    const rawUrl = (plan === 'premium') ? CHECKOUT_PREMIUM_URL : CHECKOUT_BASIC_URL;
+  // ====================================================================
+  // MOTOR DE PERSISTÊNCIA DE UTMS (ANTI-PERDA DE DADOS NO META ADS)
+  // ====================================================================
+  (function initUtmTracker() {
+    try {
+      const currentParams = new URLSearchParams(window.location.search);
+      const trackingKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'src', 'sck', 'fbclid', 'gclid', 'ttclid'];
+      const stored = JSON.parse(localStorage.getItem('herois_tracking_params') || '{}');
 
-    // Se o link já tiver sido configurado com a URL real do ggCheckout:
+      trackingKeys.forEach(key => {
+        if (currentParams.has(key)) {
+          stored[key] = currentParams.get(key);
+        }
+      });
+
+      localStorage.setItem('herois_tracking_params', JSON.stringify(stored));
+    } catch (e) {
+      console.warn('UTM Tracker local storage note:', e);
+    }
+  })();
+
+  function buildCheckoutUrl(baseUrl) {
+    try {
+      const url = new URL(baseUrl, window.location.origin);
+      const incomingParams = new URLSearchParams(window.location.search);
+      const storedParams = JSON.parse(localStorage.getItem('herois_tracking_params') || '{}');
+
+      // 1. Aplica parâmetros persistidos do localStorage
+      for (const [key, value] of Object.entries(storedParams)) {
+        if (value) url.searchParams.set(key, value);
+      }
+
+      // 2. Parâmetros da URL atual têm precedência
+      for (const [key, value] of incomingParams.entries()) {
+        url.searchParams.set(key, value);
+      }
+
+      return url.toString();
+    } catch (e) {
+      return baseUrl;
+    }
+  }
+
+  function handleCheckout(plan) {
+    const isPremium = (plan === 'premium');
+    const rawUrl = isPremium ? CHECKOUT_PREMIUM_URL : CHECKOUT_BASIC_URL;
+
+    // Dispara evento de InitiateCheckout no Meta Pixel se configurado
+    if (typeof window.fbq === 'function') {
+      try {
+        window.fbq('track', 'InitiateCheckout', {
+          content_name: isPremium ? 'Liga dos Heróis da Matemática' : 'Missão Tabuada',
+          content_ids: [isPremium ? 'liga-27' : 'tabuada-10'],
+          content_type: 'product',
+          value: isPremium ? 27.00 : 10.00,
+          currency: 'BRL'
+        });
+      } catch (err) {
+        console.warn('Pixel tracking notice:', err);
+      }
+    }
+
     if (rawUrl && !rawUrl.startsWith("INSERIR_LINK_")) {
       const finalUrl = buildCheckoutUrl(rawUrl);
       window.location.href = finalUrl;
     } else {
-      // Aviso amigável orientando como colar os links do ggCheckout:
-      const planName = (plan === 'premium') 
+      const planName = isPremium 
         ? "Liga dos Heróis da Matemática (R$ 27,00)" 
         : "Missão Tabuada (R$ 10,00)";
 
-      alert("⚙️ Configuração do GG Checkout:\n\n" +
-            "Este botão direcionará para o checkout do plano:\n" + planName + "\n\n" +
-            "Para ativar, acesse seu painel do ggCheckout (app.ggcheckout.com), copie o link do checkout e cole na constante correspondente no final deste arquivo.");
+      alert("⚙️ Checkout:\n\n" + planName);
     }
   }
 </script>
